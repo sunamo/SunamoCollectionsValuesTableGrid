@@ -31,7 +31,7 @@ public class ValuesTableGrid<T> : List<List<T>>//, IValuesTableGrid<T>
             for (int i = 0; i < s.Count; i++)
             {
                 DataRow newRow = newTable.NewRow();
-                var caption = captions[i]; //CASH.GetIndex(captions, i);
+                var caption = captions[i]; //CA.GetIndex(captions, i);
                 newRow[0] = caption == null ? string.Empty : caption.ToString();
                 for (int j = 0; j < _exists.Count; j++)
                     newRow[j + 1] = _exists[j][i];
@@ -70,7 +70,7 @@ public class ValuesTableGrid<T> : List<List<T>>//, IValuesTableGrid<T>
             {
                 ls.Add(item2.ToString());
             }
-            //var ts2 = CASH.ToListStringIList(item).ToArray();
+            //var ts2 = CA.ToListStringIList(item).ToArray();
             //var t2 = ts2.GetType();
             dt.Rows.Add(ls);
         }
