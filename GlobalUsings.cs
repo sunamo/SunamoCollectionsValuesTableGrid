@@ -11,3 +11,4 @@ global using SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions.OnlyInSE;
 global using System.Data;
 global using System.Diagnostics;
 global using System.Net;
+global using SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions.InSunamoIsDerivedFrom;

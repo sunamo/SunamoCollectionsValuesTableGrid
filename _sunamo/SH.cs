@@ -1,4 +1,4 @@
-//namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions._AddedToAllCsproj;
+namespace SunamoCollectionsValuesTableGrid._sunamo;
 
 internal class SH
 {

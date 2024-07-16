@@ -1,4 +1,4 @@
-//namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions.InSunamoIsDerivedFrom;
+namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions.InSunamoIsDerivedFrom;
 
 internal class CA
 {

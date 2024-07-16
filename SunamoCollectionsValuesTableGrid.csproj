@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>24.7.15.1</Version>
+    <Version>24.7.16.1</Version>
     <Description>Export to DataTable, flipping rows into columns and vice versa, checking if all rows / columns have the same value. Generic.</Description>
     <Authors>www.sunamo.cz</Authors>
     <Copyright>www.sunamo.cz</Copyright>
