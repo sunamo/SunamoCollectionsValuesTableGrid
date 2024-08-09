@@ -1,6 +1,5 @@
 namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoInterfaces.Interfaces;
 
-
 internal interface IValuesTableGrid<T>
 {
     bool IsAllInColumn(int i, T value);

@@ -9,23 +9,20 @@ internal class CA
                               first == "System.Collections.Generic.List`1[System.Object]")) return true;
         return false;
     }
+
     internal static void InitFillWith(List<string> datas, int pocet, string initWith = Consts.stringEmpty)
     {
         InitFillWith<string>(datas, pocet, initWith);
     }
+
     internal static void InitFillWith<T>(List<T> datas, int pocet, T initWith)
     {
-        for (int i = 0; i < pocet; i++)
-        {
-            datas.Add(initWith);
-        }
+        for (var i = 0; i < pocet; i++) datas.Add(initWith);
     }
+
     internal static void InitFillWith<T>(List<T> arr, int columns)
     {
-        for (int i = 0; i < columns; i++)
-        {
-            arr.Add(default);
-        }
+        for (var i = 0; i < columns; i++) arr.Add(default);
     }
 
     /// <summary>
@@ -50,6 +47,7 @@ internal class CA
         foreach (var item in e) count++;
         return count;
     }
+
     /// <summary>
     ///     Direct edit input collection
     /// </summary>
@@ -59,11 +57,13 @@ internal class CA
         for (var i = 0; i < l.Count; i++) l[i] = l[i].Trim();
         return l;
     }
+
     internal static string First(IEnumerable v2)
     {
         foreach (var item in v2) return item.ToString();
         return null;
     }
+
     internal static bool IsListStringWrappedInArray(IEnumerable v2)
     {
         var first = First(v2);
