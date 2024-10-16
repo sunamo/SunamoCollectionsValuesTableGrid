@@ -4,7 +4,7 @@ global using System.Collections;
 global using System.Collections.Generic;
 global using System;
 global using SunamoCollectionsValuesTableGrid._sunamo.SunamoCollectionsGeneric;
-global using SunamoCollectionsValuesTableGrid._sunamo.SunamoValues;
+global using SunamoCollectionsValuesTableGrid;
 global using SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
 global using System.Data;
 global using System.Diagnostics;
