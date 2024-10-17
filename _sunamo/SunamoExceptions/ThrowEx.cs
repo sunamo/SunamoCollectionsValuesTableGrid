@@ -1,22 +1,22 @@
 namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
-public partial class ThrowEx
+internal partial class ThrowEx
 {
-    public static bool DifferentCountInLists<T>(string namefc, IList<T> countfc, string namesc, IList<T> countsc)
+    internal static bool DifferentCountInLists<T>(string namefc, IList<T> countfc, string namesc, IList<T> countsc)
     {
         return ThrowIsNotNull(
             Exceptions.DifferentCountInLists(FullNameOfExecutedCode(), namefc, countfc.Count, namesc, countsc.Count));
     }
-    public static bool DifferentCountInLists(string namefc, int countfc, string namesc, int countsc)
+    internal static bool DifferentCountInLists(string namefc, int countfc, string namesc, int countsc)
     {
         return ThrowIsNotNull(
             Exceptions.DifferentCountInLists(FullNameOfExecutedCode(), namefc, countfc, namesc, countsc));
     }
 
-    public static bool IsNullOrEmpty(string argName, string argValue)
+    internal static bool IsNullOrEmpty(string argName, string argValue)
     { return ThrowIsNotNull(Exceptions.IsNullOrWhitespace(FullNameOfExecutedCode(), argName, argValue, true)); }
 
     #region Other
-    public static string FullNameOfExecutedCode()
+    internal static string FullNameOfExecutedCode()
     {
         Tuple<string, string, string> placeOfExc = Exceptions.PlaceOfException();
         string f = FullNameOfExecutedCode(placeOfExc.Item1, placeOfExc.Item2, true);
@@ -57,7 +57,7 @@ public partial class ThrowEx
         return string.Concat(typeFullName, ".", methodName);
     }
 
-    public static bool ThrowIsNotNull(string? exception, bool reallyThrow = true)
+    internal static bool ThrowIsNotNull(string? exception, bool reallyThrow = true)
     {
         if (exception == null)
         {
