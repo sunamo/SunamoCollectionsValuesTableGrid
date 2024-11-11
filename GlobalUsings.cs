@@ -10,3 +10,7 @@ global using System.Diagnostics;
 global using System.Reflection;
 global using System.Net;
 global using System.Diagnostics.CodeAnalysis;
+global using SunamoCollectionsValuesTableGrid;
+global using SunamoCollectionsValuesTableGrid._sunamo;
+global using SunamoCollectionsValuesTableGrid._sunamo.SunamoArgs;
+global using SunamoCollectionsValuesTableGrid._sunamo.SunamoInterfaces.Interfaces;
