@@ -1,11 +1,6 @@
 namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
 internal partial class ThrowEx
 {
-    internal static bool DifferentCountInLists<T>(string namefc, IList<T> countfc, string namesc, IList<T> countsc)
-    {
-        return ThrowIsNotNull(
-            Exceptions.DifferentCountInLists(FullNameOfExecutedCode(), namefc, countfc.Count, namesc, countsc.Count));
-    }
     internal static bool DifferentCountInLists(string namefc, int countfc, string namesc, int countsc)
     {
         return ThrowIsNotNull(
