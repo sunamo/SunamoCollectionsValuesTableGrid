@@ -7,8 +7,6 @@ internal partial class ThrowEx
             Exceptions.DifferentCountInLists(FullNameOfExecutedCode(), namefc, countfc, namesc, countsc));
     }
 
-    internal static bool IsNullOrEmpty(string argName, string argValue)
-    { return ThrowIsNotNull(Exceptions.IsNullOrWhitespace(FullNameOfExecutedCode(), argName, argValue, true)); }
 
     #region Other
     internal static string FullNameOfExecutedCode()
