@@ -14,3 +14,7 @@ global using SunamoCollectionsValuesTableGrid;
 global using SunamoCollectionsValuesTableGrid._sunamo;
 global using SunamoCollectionsValuesTableGrid._sunamo.SunamoArgs;
 global using SunamoCollectionsValuesTableGrid._sunamo.SunamoInterfaces.Interfaces;
+
+global using ILogger = Microsoft.Extensions.Logging.ILogger;
+global using Microsoft.Extensions.Logging;
+global using NullLogger = Microsoft.Extensions.Logging.Abstractions.NullLogger;
