@@ -1,3 +1,6 @@
+// EN: Variable names have been checked and replaced with self-descriptive names
+// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+
 namespace SunamoCollectionsValuesTableGrid;
 
 /// <summary>
@@ -40,8 +43,8 @@ public class ValuesTableGrid<T> : List<List<T>> //, IValuesTableGrid<T>
             // Můžu přidám sloupec pro B,C,D...
             for (var i = 0; i < _exists.Count; i++)
                 newTable.Columns.Add();
-            var s = _exists[0];
-            for (var i = 0; i < s.Count; i++)
+            var text = _exists[0];
+            for (var i = 0; i < text.Count; i++)
             {
                 var newRow = newTable.NewRow();
                 var caption = captions[i]; //CA.GetIndex(captions, i);
@@ -79,11 +82,11 @@ public class ValuesTableGrid<T> : List<List<T>> //, IValuesTableGrid<T>
         dt.Rows.Add(ts);
         foreach (var item in _exists)
         {
-            var ls = new List<string>(item.Count);
-            foreach (var item2 in item) ls.Add(item2.ToString());
+            var sourceList = new List<string>(item.Count);
+            foreach (var item2 in item) sourceList.Add(item2.ToString());
             //var ts2 = CA.ToListStringIList(item).ToArray();
             //var t2 = ts2.GetType();
-            dt.Rows.Add(ls);
+            dt.Rows.Add(sourceList);
         }
 
         return dt;
