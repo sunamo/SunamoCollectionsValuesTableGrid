@@ -1,6 +1,7 @@
+namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
+
 // EN: Variable names have been checked and replaced with self-descriptive names
 // CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
-namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
 internal partial class ThrowEx
 {
     internal static bool DifferentCountInLists(string namefc, int countfc, string namesc, int countsc)
