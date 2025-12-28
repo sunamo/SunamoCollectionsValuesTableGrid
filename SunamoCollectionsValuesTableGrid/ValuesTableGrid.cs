@@ -1,5 +1,7 @@
 namespace SunamoCollectionsValuesTableGrid;
 
+// EN: Variable names have been checked and replaced with self-descriptive names
+// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
 /// <summary>
 ///     Similar class with two dimension array is UniqueTableInWhole
 ///     Allow make query to parallel collections as be one
@@ -13,17 +15,17 @@ public class ValuesTableGrid<T> : List<List<T>> //, IValuesTableGrid<T>
     /// </summary>
     private readonly List<List<T>> _exists;
 
-    public List<string> captions;
+    public List<string> Captions { get; set; }
 
-    public ValuesTableGrid(List<List<T>> exists, bool keepInSizeOfSmallest = true)
+    public ValuesTableGrid(List<List<T>> rows, bool isTrimToSmallest = true)
     {
-        if (keepInSizeOfSmallest)
+        if (isTrimToSmallest)
         {
-            var lowest = CAG.LowestCount(exists);
-            exists = CAG.TrimInnersToCount(exists, lowest);
+            var lowest = CAG.LowestCount(rows);
+            rows = CAG.TrimInnersToCount(rows, lowest);
         }
 
-        _exists = exists;
+        _exists = rows;
     }
 
     /// <summary>
@@ -40,11 +42,11 @@ public class ValuesTableGrid<T> : List<List<T>> //, IValuesTableGrid<T>
             // Můžu přidám sloupec pro B,C,D...
             for (var i = 0; i < _exists.Count; i++)
                 newTable.Columns.Add();
-            var text = _exists[0];
-            for (var i = 0; i < text.Count; i++)
+            var firstRow = _exists[0];
+            for (var i = 0; i < firstRow.Count; i++)
             {
                 var newRow = newTable.NewRow();
-                var caption = captions[i]; //CA.GetIndex(captions, i);
+                var caption = Captions[i]; //CA.GetIndex(Captions, i);
                 newRow[0] = caption == null ? string.Empty : caption;
                 for (var j = 0; j < _exists.Count; j++)
                     newRow[j + 1] = _exists[j][i];
@@ -57,46 +59,46 @@ public class ValuesTableGrid<T> : List<List<T>> //, IValuesTableGrid<T>
 
     public DataTable ToDataTable()
     {
-        var dt = new DataTable();
+        var dataTable = new DataTable();
         var min = CAG.MinElementsItemsInnerList(_exists);
         var max = CAG.MaxElementsItemsInnerList(_exists);
-        var cc = captions.Count;
-        if (min != cc)
+        var captionCount = Captions.Count;
+        if (min != captionCount)
         {
-            ThrowEx.DifferentCountInLists("min", min, "cc", cc);
+            ThrowEx.DifferentCountInLists("min", min, "captionCount", captionCount);
             return null;
         }
 
-        if (max != cc)
+        if (max != captionCount)
         {
-            ThrowEx.DifferentCountInLists("max", max, "cc", cc);
+            ThrowEx.DifferentCountInLists("max", max, "captionCount", captionCount);
             return null;
         }
 
-        for (var i = 0; i < cc; i++) dt.Columns.Add();
-        var ts = captions.ToArray();
-        //var t1 = ts.GetType();
-        dt.Rows.Add(ts);
+        for (var i = 0; i < captionCount; i++) dataTable.Columns.Add();
+        var captionArray = Captions.ToArray();
+        //var t1 = captionArray.GetType();
+        dataTable.Rows.Add(captionArray);
         foreach (var item in _exists)
         {
-            var sourceList = new List<string>(item.Count);
-            foreach (var item2 in item) sourceList.Add(item2.ToString());
+            var strings = new List<string>(item.Count);
+            foreach (var element in item) strings.Add(element.ToString());
             //var ts2 = CA.ToListStringIList(item).ToArray();
             //var t2 = ts2.GetType();
-            dt.Rows.Add(sourceList);
+            dataTable.Rows.Add(strings);
         }
 
-        return dt;
+        return dataTable;
     }
 
-    public bool IsAllInColumn(int i, T value)
+    public bool IsAllInColumn(int columnIndex, T value)
     {
-        return _exists[i].All(d => EqualityComparer<T>.Default.Equals(d, value)); //CAG.IsAllTheSame<T>(value, );
+        return _exists[columnIndex].All(element => EqualityComparer<T>.Default.Equals(element, value)); //CAG.IsAllTheSame<T>(value, );
     }
 
-    public bool IsAllInRow(int i, T value)
+    public bool IsAllInRow(int rowIndex, T value)
     {
-        var list = _exists[i];
+        var list = _exists[rowIndex];
         foreach (var item in list)
             if (!EqualityComparer<T>.Default.Equals(item, value))
                 return false;
