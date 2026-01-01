@@ -1,13 +1,19 @@
 namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoArgs;
 
-// EN: Variable names have been checked and replaced with self-descriptive names
-// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+/// <summary>
+/// Arguments for removing elements starting with specific patterns.
+/// </summary>
 internal class RemoveStartingWithArgs
 {
     /// <summary>
-    ///     Original
+    /// Gets or sets a value indicating whether to trim whitespace before finding the pattern.
+    /// Original default value is false.
     /// </summary>
-    internal bool TrimBeforeFinding = false;
+    internal bool IsTrimBeforeFinding { get; set; } = false;
 
-    internal bool CaseSensitive = true;
+    /// <summary>
+    /// Gets or sets a value indicating whether the comparison is case sensitive.
+    /// Original default value is true.
+    /// </summary>
+    internal bool IsCaseSensitive { get; set; } = true;
 }
