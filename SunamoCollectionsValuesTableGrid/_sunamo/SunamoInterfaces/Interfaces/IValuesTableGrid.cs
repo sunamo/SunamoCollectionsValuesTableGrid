@@ -1,3 +1,4 @@
+// variables names: ok
 namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoInterfaces.Interfaces;
 
 // EN: Variable names have been checked and replaced with self-descriptive names

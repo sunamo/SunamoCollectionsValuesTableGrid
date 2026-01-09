@@ -1,3 +1,4 @@
+// variables names: ok
 namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoArgs;
 
 /// <summary>
