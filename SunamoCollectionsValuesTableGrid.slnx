@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SunamoCollectionsValuesTableGrid.Tests\\SunamoCollectionsValuesTableGrid.Tests.csproj" />
+  <Project Path="RunnerCollectionsValuesTableGrid\\RunnerCollectionsValuesTableGrid.csproj" />
+  <Project Path="SunamoCollectionsValuesTableGrid\SunamoCollectionsValuesTableGrid.csproj" />
+</Solution>
