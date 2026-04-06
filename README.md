@@ -1,6 +1,6 @@
 # SunamoCollectionsValuesTableGrid
 
-Export to DataTable, flipping rows into columns and vice versa, checking if all rows / columns have the same value. Generic.
+A generic two-dimensional table grid for .NET that allows querying parallel collections as one. Supports exporting to `DataTable`, transposing rows into columns and vice versa, and checking if all rows or columns contain the same value.
 
 ## Overview
 
@@ -10,14 +10,14 @@ SunamoCollectionsValuesTableGrid is part of the Sunamo package ecosystem, provid
 
 ### Key Classes
 
-- **ValuesTableGrid**
+- **ValuesTableGrid&lt;T&gt;** — generic table grid inheriting from `List<List<T>>`
 
 ### Key Methods
 
-- `SwitchRowsAndColumn()`
-- `ToDataTable()`
-- `IsAllInColumn()`
-- `IsAllInRow()`
+- `SwitchRowsAndColumn()` — transposes the grid into a DataTable
+- `ToDataTable()` — converts the grid to a DataTable with captions
+- `IsAllInColumn()` — checks if all elements in a column equal a value
+- `IsAllInRow()` — checks if all elements in a row equal a value
 
 ## Installation
 
@@ -25,17 +25,18 @@ SunamoCollectionsValuesTableGrid is part of the Sunamo package ecosystem, provid
 dotnet add package SunamoCollectionsValuesTableGrid
 ```
 
+## Target Frameworks
+
+`net10.0`, `net9.0`, `net8.0`
+
 ## Dependencies
 
-- **Microsoft.Extensions.Logging.Abstractions** (v9.0.3)
+- **Microsoft.Extensions.Logging.Abstractions**
 
 ## Package Information
 
 - **Package Name**: SunamoCollectionsValuesTableGrid
-- **Version**: 25.3.29.1
-- **Target Framework**: net9.0
 - **Category**: Platform-Independent NuGet Package
-- **Source Files**: 8
 
 ## Related Packages
 
@@ -43,4 +44,4 @@ This package is part of the Sunamo package ecosystem. For more information about
 
 ## License
 
-See the repository root for license information.
+MIT

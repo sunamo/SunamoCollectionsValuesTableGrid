@@ -9,7 +9,7 @@ namespace SunamoCollectionsValuesTableGrid;
 /// <typeparam name="T">The type of elements in the table grid.</typeparam>
 public class ValuesTableGrid<T> : List<List<T>>
 {
-    private readonly List<List<T>> _exists;
+    private readonly List<List<T>> rows;
 
     /// <summary>
     /// Gets or sets the column captions for the table grid.
@@ -25,11 +25,11 @@ public class ValuesTableGrid<T> : List<List<T>>
     {
         if (isTrimToSmallest)
         {
-            var lowest = CAG.LowestCount(rows);
-            rows = CAG.TrimInnersToCount(rows, lowest);
+            var lowestCount = CAG.LowestCount(rows);
+            rows = CAG.TrimInnersToCount(rows, lowestCount);
         }
 
-        _exists = rows;
+        this.rows = rows;
     }
 
     /// <summary>
@@ -41,19 +41,19 @@ public class ValuesTableGrid<T> : List<List<T>>
     public DataTable SwitchRowsAndColumn()
     {
         var newTable = new DataTable();
-        if (_exists.Count > 0)
+        if (rows.Count > 0)
         {
             newTable.Columns.Add(string.Empty);
-            for (var i = 0; i < _exists.Count; i++)
+            for (var i = 0; i < rows.Count; i++)
                 newTable.Columns.Add();
-            var firstRow = _exists[0];
+            var firstRow = rows[0];
             for (var i = 0; i < firstRow.Count; i++)
             {
                 var newRow = newTable.NewRow();
                 var caption = Captions[i];
                 newRow[0] = caption == null ? string.Empty : caption;
-                for (var j = 0; j < _exists.Count; j++)
-                    newRow[j + 1] = _exists[j][i];
+                for (var j = 0; j < rows.Count; j++)
+                    newRow[j + 1] = rows[j][i];
                 newTable.Rows.Add(newRow);
             }
         }
@@ -68,25 +68,25 @@ public class ValuesTableGrid<T> : List<List<T>>
     public DataTable? ToDataTable()
     {
         var dataTable = new DataTable();
-        var min = CAG.MinElementsItemsInnerList(_exists);
-        var max = CAG.MaxElementsItemsInnerList(_exists);
+        var minCount = CAG.MinElementsItemsInnerList(rows);
+        var maxCount = CAG.MaxElementsItemsInnerList(rows);
         var captionCount = Captions.Count;
-        if (min != captionCount)
+        if (minCount != captionCount)
         {
-            ThrowEx.DifferentCountInLists("min", min, "captionCount", captionCount);
+            ThrowEx.DifferentCountInLists("minCount", minCount, "captionCount", captionCount);
             return null;
         }
 
-        if (max != captionCount)
+        if (maxCount != captionCount)
         {
-            ThrowEx.DifferentCountInLists("max", max, "captionCount", captionCount);
+            ThrowEx.DifferentCountInLists("maxCount", maxCount, "captionCount", captionCount);
             return null;
         }
 
         for (var i = 0; i < captionCount; i++) dataTable.Columns.Add();
         var captionArray = Captions.ToArray();
         dataTable.Rows.Add(captionArray);
-        foreach (var item in _exists)
+        foreach (var item in rows)
         {
             var strings = new List<string>(item.Count);
             foreach (var element in item) strings.Add(element?.ToString() ?? string.Empty);
@@ -104,7 +104,7 @@ public class ValuesTableGrid<T> : List<List<T>>
     /// <returns>True if all elements in the column equal the value; otherwise, false.</returns>
     public bool IsAllInColumn(int columnIndex, T value)
     {
-        return _exists[columnIndex].All(element => EqualityComparer<T>.Default.Equals(element, value));
+        return rows[columnIndex].All(element => EqualityComparer<T>.Default.Equals(element, value));
     }
 
     /// <summary>
@@ -115,7 +115,7 @@ public class ValuesTableGrid<T> : List<List<T>>
     /// <returns>True if all elements in the row equal the value; otherwise, false.</returns>
     public bool IsAllInRow(int rowIndex, T value)
     {
-        var list = _exists[rowIndex];
+        var list = rows[rowIndex];
         foreach (var item in list)
             if (!EqualityComparer<T>.Default.Equals(item, value))
                 return false;

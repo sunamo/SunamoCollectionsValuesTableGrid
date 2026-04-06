@@ -37,14 +37,14 @@ internal partial class ThrowEx
     /// </summary>
     /// <param name="type">The type information (can be Type, MethodBase, string, or any object).</param>
     /// <param name="methodName">The method name, or null to auto-detect from call stack.</param>
-    /// <param name="fromThrowEx">True if called from ThrowEx class (adjusts stack depth).</param>
+    /// <param name="isFromThrowEx">True if called from ThrowEx class (adjusts stack depth).</param>
     /// <returns>A string in the format "TypeFullName.MethodName".</returns>
-    static string FullNameOfExecutedCode(object type, string methodName, bool fromThrowEx = false)
+    static string FullNameOfExecutedCode(object type, string methodName, bool isFromThrowEx = false)
     {
         if (methodName == null)
         {
             int depth = 2;
-            if (fromThrowEx)
+            if (isFromThrowEx)
             {
                 depth++;
             }
@@ -52,23 +52,23 @@ internal partial class ThrowEx
             methodName = Exceptions.CallingMethod(depth);
         }
         string typeFullName;
-        if (type is Type type2)
+        if (type is Type matchedType)
         {
-            typeFullName = type2.FullName ?? "Type cannot be get via type is Type type2";
+            typeFullName = matchedType.FullName ?? "Type cannot be retrieved via type is Type";
         }
-        else if (type is MethodBase method)
+        else if (type is MethodBase methodBase)
         {
-            typeFullName = method.ReflectedType?.FullName ?? "Type cannot be get via type is MethodBase method";
-            methodName = method.Name;
+            typeFullName = methodBase.ReflectedType?.FullName ?? "Type cannot be retrieved via type is MethodBase";
+            methodName = methodBase.Name;
         }
         else if (type is string)
         {
-            typeFullName = type.ToString() ?? "Type cannot be get via type is string";
+            typeFullName = type.ToString() ?? "Type cannot be retrieved via type is string";
         }
         else
         {
             Type resolvedType = type.GetType();
-            typeFullName = resolvedType.FullName ?? "Type cannot be get via type.GetType()";
+            typeFullName = resolvedType.FullName ?? "Type cannot be retrieved via type.GetType()";
         }
         return string.Concat(typeFullName, ".", methodName);
     }
@@ -77,14 +77,14 @@ internal partial class ThrowEx
     /// Throws an exception if the provided exception message is not null.
     /// </summary>
     /// <param name="exception">The exception message to check.</param>
-    /// <param name="isReallyThrow">If true, actually throws the exception; if false, only breaks debugger.</param>
+    /// <param name="isReallyThrowing">If true, actually throws the exception; if false, only breaks debugger.</param>
     /// <returns>True if an exception message was provided; otherwise, false.</returns>
-    internal static bool ThrowIsNotNull(string? exception, bool isReallyThrow = true)
+    internal static bool ThrowIsNotNull(string? exception, bool isReallyThrowing = true)
     {
         if (exception != null)
         {
             Debugger.Break();
-            if (isReallyThrow)
+            if (isReallyThrowing)
             {
                 throw new Exception(exception);
             }

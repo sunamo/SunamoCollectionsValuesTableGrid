@@ -19,25 +19,24 @@ internal sealed partial class Exceptions
     /// <summary>
     /// Extracts information about where an exception occurred from the current stack trace.
     /// </summary>
-    /// <param name="fillAlsoFirstTwo">If true, also fills type and method name from the first non-ThrowEx frame.</param>
+    /// <param name="isFillingFirstTwo">If true, also fills type and method name from the first non-ThrowEx frame.</param>
     /// <returns>A tuple containing the type name, method name, and formatted stack trace string.</returns>
-    internal static Tuple<string, string, string> PlaceOfException(bool fillAlsoFirstTwo = true)
+    internal static Tuple<string, string, string> PlaceOfException(bool isFillingFirstTwo = true)
     {
         StackTrace stackTrace = new();
         var stackTraceString = stackTrace.ToString();
         var lines = stackTraceString.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
         lines.RemoveAt(0);
-        var i = 0;
         string type = string.Empty;
         string methodName = string.Empty;
-        for (; i < lines.Count; i++)
+        for (var lineIndex = 0; lineIndex < lines.Count; lineIndex++)
         {
-            var line = lines[i];
-            if (fillAlsoFirstTwo)
+            var line = lines[lineIndex];
+            if (isFillingFirstTwo)
                 if (!line.StartsWith("   at ThrowEx"))
                 {
                     TypeAndMethodName(line, out type, out methodName);
-                    fillAlsoFirstTwo = false;
+                    isFillingFirstTwo = false;
                 }
             if (line.StartsWith("at System."))
             {
@@ -76,7 +75,7 @@ internal sealed partial class Exceptions
         var methodBase = stackTrace.GetFrame(depth)?.GetMethod();
         if (methodBase == null)
         {
-            return "Method name cannot be get";
+            return "Method name cannot be retrieved";
         }
         var methodName = methodBase.Name;
         return methodName;

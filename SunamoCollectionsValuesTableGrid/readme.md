@@ -1,20 +1,34 @@
-### SunamoCollectionsValuesTableGrid
+# SunamoCollectionsValuesTableGrid
 
-Part of PlatformIndependentNuGetPackages:
+A generic two-dimensional table grid for .NET that allows querying parallel collections as one. Supports exporting to `DataTable`, transposing rows into columns and vice versa, and checking if all rows or columns contain the same value.
 
-- [nuget.org](https://www.nuget.org/profiles/sunamo)
-- [github.org](https://github.com/sunamo/PlatformIndependentNuGetPackages)
+## Features
 
-Another links:
+- **ValuesTableGrid&lt;T&gt;** — generic class inheriting from `List<List<T>>`
+- **SwitchRowsAndColumn()** — transposes the grid into a `DataTable` (rows become columns)
+- **ToDataTable()** — converts the grid to a `DataTable` with captions as the first row
+- **IsAllInColumn() / IsAllInRow()** — checks whether all elements in a given column or row equal a specified value
 
-- [Developer site](https://sunamo.cz)
+## Installation
 
-Request for new features / bug report / etc: [Mail](mailto:radek.jancik@sunamo.cz) or on GitHub
+```bash
+dotnet add package SunamoCollectionsValuesTableGrid
+```
+
 ## Target Frameworks
 
-**TargetFrameworks:** `net10.0;net9.0;net8.0`
+`net10.0`, `net9.0`, `net8.0`
 
-**Reason:** Code uses C# 12.0 features (collection expressions, primary constructors) or dependencies requiring .NET 8.0+:
-- Collection expressions `[]` syntax requires C# 12.0 (net8.0+)
-- Primary constructors require C# 12.0 (net8.0+) 
-- Entity Framework Core 9.x requires net8.0+
+## Dependencies
+
+- **Microsoft.Extensions.Logging.Abstractions**
+
+## Links
+
+- [NuGet](https://www.nuget.org/profiles/sunamo)
+- [GitHub](https://github.com/sunamo/PlatformIndependentNuGetPackages)
+- [Developer site](https://sunamo.cz)
+
+## License
+
+MIT
