@@ -3,17 +3,16 @@ namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
 /// <summary>
 /// Helper class for creating exception messages and extracting stack trace information.
 /// </summary>
-internal sealed partial class Exceptions
+internal sealed class Exceptions
 {
-    #region Other
     /// <summary>
     /// Checks and formats a prefix string for exception messages.
     /// </summary>
-    /// <param name="before">The prefix string to check.</param>
+    /// <param name="prefix">The prefix string to check.</param>
     /// <returns>An empty string if the prefix is null or whitespace; otherwise, the prefix followed by ": ".</returns>
-    internal static string CheckBefore(string before)
+    internal static string FormatPrefix(string prefix)
     {
-        return string.IsNullOrWhiteSpace(before) ? string.Empty : before + ": ";
+        return string.IsNullOrWhiteSpace(prefix) ? string.Empty : prefix + ": ";
     }
 
     /// <summary>
@@ -80,33 +79,20 @@ internal sealed partial class Exceptions
         var methodName = methodBase.Name;
         return methodName;
     }
-    #endregion
-
-    #region IsNullOrWhitespace
-    /// <summary>
-    /// StringBuilder for storing additional inner information about exceptions.
-    /// </summary>
-    internal readonly static StringBuilder AdditionalInfoInnerStringBuilder = new();
-
-    /// <summary>
-    /// StringBuilder for storing additional information about exceptions.
-    /// </summary>
-    internal readonly static StringBuilder AdditionalInfoStringBuilder = new();
-    #endregion
 
     /// <summary>
     /// Creates an error message for when two collections have different element counts.
     /// </summary>
-    /// <param name="before">Prefix text for the error message.</param>
+    /// <param name="prefix">Prefix text for the error message.</param>
     /// <param name="firstCollectionName">Name of the first collection.</param>
     /// <param name="firstCollectionCount">Element count of the first collection.</param>
     /// <param name="secondCollectionName">Name of the second collection.</param>
     /// <param name="secondCollectionCount">Element count of the second collection.</param>
     /// <returns>An error message string if counts differ; otherwise, null.</returns>
-    internal static string? DifferentCountInLists(string before, string firstCollectionName, int firstCollectionCount, string secondCollectionName, int secondCollectionCount)
+    internal static string? DifferentCountInLists(string prefix, string firstCollectionName, int firstCollectionCount, string secondCollectionName, int secondCollectionCount)
     {
         if (firstCollectionCount != secondCollectionCount)
-            return CheckBefore(before) + " different count elements in collection" + " " +
+            return FormatPrefix(prefix) + " different count elements in collection" + " " +
             string.Concat(firstCollectionName + "-" + firstCollectionCount) + " vs. " +
             string.Concat(secondCollectionName + "-" + secondCollectionCount);
         return null;

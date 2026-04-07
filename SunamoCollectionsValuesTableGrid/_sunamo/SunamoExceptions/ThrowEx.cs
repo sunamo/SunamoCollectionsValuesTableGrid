@@ -3,7 +3,7 @@ namespace SunamoCollectionsValuesTableGrid._sunamo.SunamoExceptions;
 /// <summary>
 /// Helper class for throwing exceptions with detailed stack trace information.
 /// </summary>
-internal partial class ThrowEx
+internal class ThrowEx
 {
     /// <summary>
     /// Throws an exception if two collections have different element counts.
@@ -19,8 +19,6 @@ internal partial class ThrowEx
             Exceptions.DifferentCountInLists(FullNameOfExecutedCode(), firstCollectionName, firstCollectionCount, secondCollectionName, secondCollectionCount));
     }
 
-
-    #region Other
     /// <summary>
     /// Gets the full name (type.method) of the currently executed code.
     /// </summary>
@@ -76,21 +74,20 @@ internal partial class ThrowEx
     /// <summary>
     /// Throws an exception if the provided exception message is not null.
     /// </summary>
-    /// <param name="exception">The exception message to check.</param>
+    /// <param name="exceptionMessage">The exception message to check.</param>
     /// <param name="isReallyThrowing">If true, actually throws the exception; if false, only breaks debugger.</param>
     /// <returns>True if an exception message was provided; otherwise, false.</returns>
-    internal static bool ThrowIsNotNull(string? exception, bool isReallyThrowing = true)
+    internal static bool ThrowIsNotNull(string? exceptionMessage, bool isReallyThrowing = true)
     {
-        if (exception != null)
+        if (exceptionMessage != null)
         {
             Debugger.Break();
             if (isReallyThrowing)
             {
-                throw new Exception(exception);
+                throw new Exception(exceptionMessage);
             }
             return true;
         }
         return false;
     }
-    #endregion
 }
