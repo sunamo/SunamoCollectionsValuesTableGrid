@@ -2,9 +2,8 @@ namespace SunamoCollectionsValuesTableGrid;
 
 /// <summary>
 /// Represents a two-dimensional table grid that allows querying parallel collections as one.
-/// Similar class with two dimension array is UniqueTableInWhole.
-/// Row - wrapper - files 2
-/// Column - inner - apps 4
+/// Rows represent the outer list, columns represent inner list elements.
+/// A similar class using a two-dimensional array is UniqueTableInWhole.
 /// </summary>
 /// <typeparam name="T">The type of elements in the table grid.</typeparam>
 public class ValuesTableGrid<T> : List<List<T>>
@@ -34,8 +33,8 @@ public class ValuesTableGrid<T> : List<List<T>>
 
     /// <summary>
     /// Switches rows and columns to create a transposed DataTable.
-    /// Must have initialized captions variable.
-    /// All rows must be trimmed from \r \n.
+    /// The Captions property must be initialized before calling this method.
+    /// All row values must not contain carriage return or newline characters.
     /// </summary>
     /// <returns>A DataTable with rows and columns switched.</returns>
     public DataTable SwitchRowsAndColumn()
@@ -51,7 +50,7 @@ public class ValuesTableGrid<T> : List<List<T>>
             {
                 var newRow = newTable.NewRow();
                 var caption = Captions[i];
-                newRow[0] = caption == null ? string.Empty : caption;
+                newRow[0] = caption ?? string.Empty;
                 for (var j = 0; j < rows.Count; j++)
                     newRow[j + 1] = rows[j][i];
                 newTable.Rows.Add(newRow);
@@ -88,9 +87,9 @@ public class ValuesTableGrid<T> : List<List<T>>
         dataTable.Rows.Add(captionArray);
         foreach (var item in rows)
         {
-            var strings = new List<string>(item.Count);
-            foreach (var element in item) strings.Add(element?.ToString() ?? string.Empty);
-            dataTable.Rows.Add(strings);
+            var rowValues = new List<string>(item.Count);
+            foreach (var element in item) rowValues.Add(element?.ToString() ?? string.Empty);
+            dataTable.Rows.Add(rowValues);
         }
 
         return dataTable;
@@ -115,8 +114,8 @@ public class ValuesTableGrid<T> : List<List<T>>
     /// <returns>True if all elements in the row equal the value; otherwise, false.</returns>
     public bool IsAllInRow(int rowIndex, T value)
     {
-        var list = rows[rowIndex];
-        foreach (var item in list)
+        var row = rows[rowIndex];
+        foreach (var item in row)
             if (!EqualityComparer<T>.Default.Equals(item, value))
                 return false;
         return true;
