@@ -1,11 +1,25 @@
 namespace SunamoCollectionsValuesTableGrid;
 
+/// <summary>
+/// Represents a two-dimensional table grid that allows querying parallel collections as one.
+/// Rows represent the outer list, columns represent inner list elements.
+/// A similar class using a two-dimensional array is UniqueTableInWhole.
+/// </summary>
+/// <typeparam name="T">The type of elements in the table grid.</typeparam>
 public class ValuesTableGrid<T> : List<List<T>>
 {
     private readonly List<List<T>> rows;
 
+    /// <summary>
+    /// Gets or sets the column captions for the table grid.
+    /// </summary>
     public List<string> Captions { get; set; } = new List<string>();
 
+    /// <summary>
+    /// Initializes a new instance of the ValuesTableGrid class.
+    /// </summary>
+    /// <param name="rows">The collection of rows to initialize the grid with.</param>
+    /// <param name="isTrimToSmallest">If true, trims all rows to match the smallest row count.</param>
     public ValuesTableGrid(List<List<T>> rows, bool isTrimToSmallest = true)
     {
         if (isTrimToSmallest)
@@ -17,6 +31,12 @@ public class ValuesTableGrid<T> : List<List<T>>
         this.rows = rows;
     }
 
+    /// <summary>
+    /// Switches rows and columns to create a transposed DataTable.
+    /// The Captions property must be initialized before calling this method.
+    /// All row values must not contain carriage return or newline characters.
+    /// </summary>
+    /// <returns>A DataTable with rows and columns switched.</returns>
     public DataTable SwitchRowsAndColumn()
     {
         var newTable = new DataTable();
@@ -40,6 +60,10 @@ public class ValuesTableGrid<T> : List<List<T>>
         return newTable;
     }
 
+    /// <summary>
+    /// Converts the grid data to a DataTable with captions as the first row.
+    /// </summary>
+    /// <returns>A DataTable representing the grid data, or null if validation fails.</returns>
     public DataTable? ToDataTable()
     {
         var dataTable = new DataTable();
@@ -71,11 +95,23 @@ public class ValuesTableGrid<T> : List<List<T>>
         return dataTable;
     }
 
+    /// <summary>
+    /// Checks if all elements in the specified column equal the given value.
+    /// </summary>
+    /// <param name="columnIndex">The zero-based index of the column to check.</param>
+    /// <param name="value">The value to compare against.</param>
+    /// <returns>True if all elements in the column equal the value; otherwise, false.</returns>
     public bool IsAllInColumn(int columnIndex, T value)
     {
         return rows[columnIndex].All(element => EqualityComparer<T>.Default.Equals(element, value));
     }
 
+    /// <summary>
+    /// Checks if all elements in the specified row equal the given value.
+    /// </summary>
+    /// <param name="rowIndex">The zero-based index of the row to check.</param>
+    /// <param name="value">The value to compare against.</param>
+    /// <returns>True if all elements in the row equal the value; otherwise, false.</returns>
     public bool IsAllInRow(int rowIndex, T value)
     {
         var row = rows[rowIndex];
