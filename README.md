@@ -1,5 +1,10 @@
 # SunamoCollectionsValuesTableGrid
 
+## Short description
+
+Generická dvourozměrná tabulka, která umožňuje dotazovat paralelní kolekce jako jednu. Podporuje export do DataTable a transpozici řádků na sloupce.
+
+
 A generic two-dimensional table grid for .NET that allows querying parallel collections as one. Supports exporting to `DataTable`, transposing rows into columns and vice versa, and checking if all rows or columns contain the same value.
 
 ## Overview
